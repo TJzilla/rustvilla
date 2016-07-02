@@ -63,4 +63,10 @@ public class GameAsset
 	{
 		return this.assetYPos;
 	}
+	
+	// returns the asset's Id
+	public int getId()
+	{
+		return this.assetId;
+	}
 }
