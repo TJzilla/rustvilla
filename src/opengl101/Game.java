@@ -102,5 +102,9 @@ public class Game extends JFrame implements GLEventListener
 	@Override
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
 	{	
+		this.win_height = this.getHeight();
+		this.win_width = this.getWidth();
+		System.out.println("The window width is " + this.win_height);
+		System.out.println("The window height is " + this.win_width);
 	}
 }
