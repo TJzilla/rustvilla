@@ -1,0 +1,60 @@
+package opengl101;
+
+import com.jogamp.opengl.GL4;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
+import javax.swing.JFrame;
+
+
+
+public class Game extends JFrame implements GLEventListener
+{
+	// dunno wtf this does
+	private static final long serialVersionUID = 1L;
+	// define height and width of our window
+	final private int width = 800;
+	final private int height = 600;
+	
+	
+	
+	public Game()
+	{
+		// create a swing window with the title "Minimal OpenGL"
+		super("Minimal OpenGL");
+		// set the OpenGL profile to use
+		
+		this.setName("Minimal OpenGL");
+		
+		this.setSize(width,height);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.setResizable(false);
+	}
+	public void play()
+	{
+		
+	}
+	
+	s
+	@Override
+	public void display(GLAutoDrawable drawable)
+	{
+		
+	}
+	
+	@Override
+	public void dispose(GLAutoDrawable drawable)
+	{
+		
+	}
+	
+	@Override
+	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
+	{
+		
+	}
+}

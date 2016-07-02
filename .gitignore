@@ -11,8 +11,13 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+<<<<<<< HEAD
 # Binari
 .classpath
 .porject
 .recommenders
 .settings
+=======
+# Binaries
+bin
+>>>>>>> ebd6827baad9287e6c46884e948f07b29ff3c564
