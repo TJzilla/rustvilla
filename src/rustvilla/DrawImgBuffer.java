@@ -1,4 +1,4 @@
-package opengl101;
+package rustvilla;
 
 import java.awt.image.*;
 import java.nio.ByteBuffer;

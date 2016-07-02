@@ -1,4 +1,4 @@
-package opengl101;
+package rustvilla;
 
 public class GameAsset
 {

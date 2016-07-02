@@ -1,4 +1,4 @@
-package opengl101;
+package rustvilla;
 
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.util.FPSAnimator;
@@ -16,8 +16,8 @@ public class Game extends JFrame implements GLEventListener
 	// define height and width of our window
 	private int win_width = 800;
 	private int win_height = 600;
+	
 	private float r,b,g;
-
 	
 	public Game()
 	{
