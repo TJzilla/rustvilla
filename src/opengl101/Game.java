@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 public class Game extends JFrame implements GLEventListener
 {
 	private static final long serialVersionUID = 1L;
+	
 	// define height and width of our window
 	final private int width = 800;
 	final private int height = 600;
@@ -19,6 +20,7 @@ public class Game extends JFrame implements GLEventListener
 	{
 		// create a swing window with the title "Minimal OpenGL"
 		super("Minimal OpenGL");
+		
 		// set the OpenGL profile to use
 		GLProfile profile = GLProfile.get(GLProfile.GL3);
 		GLCapabilities capabilities = new GLCapabilities(profile);
@@ -39,7 +41,8 @@ public class Game extends JFrame implements GLEventListener
 		
 		canvas.requestFocusInWindow();
 	}
-	
+
+	// initializes an OGL drawable class and sets the background color
 	public void init(GLAutoDrawable drawable)
 	{
 		GL3 gl = drawable.getGL().getGL3();
@@ -50,6 +53,7 @@ public class Game extends JFrame implements GLEventListener
 	{	
 	}
 	
+	// calls the OGL backend and requests to draw the window contents
 	@Override
 	public void display(GLAutoDrawable drawable)
 	{

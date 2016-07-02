@@ -9,3 +9,5 @@ public class Main {
 	}
 
 }
+
+// COMMENTS ARE MAGIC FRIENDSHIP KILLS
