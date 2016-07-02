@@ -1,5 +1,6 @@
 package opengl101;
 
+import com.jogamp.opengl.glu.*;
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -13,8 +14,8 @@ public class Game extends JFrame implements GLEventListener
 	private static final long serialVersionUID = 1L;
 	
 	// define height and width of our window
-	final private int width = 800;
-	final private int height = 600;
+	private int win_width = 800;
+	private int win_height = 600;
 	
 	public Game()
 	{
@@ -33,7 +34,9 @@ public class Game extends JFrame implements GLEventListener
 		this.setName("Minimal OpenGL");
 		this.getContentPane().add(canvas);
 		
-		this.setSize(width,height);
+		// Prevent Div by Zero
+		if (win_height == 0) win_height = 1;
+		this.setSize(win_width,win_height);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
