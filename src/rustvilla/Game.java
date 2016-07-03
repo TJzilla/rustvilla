@@ -5,6 +5,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLEventListener;
+// import com.jogamp.newt.event.KeyListener;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import javax.swing.JFrame;
@@ -41,6 +42,8 @@ public class Game extends JFrame implements GLEventListener
 		
 		// Prevent Div by Zero
 		if (win_height == 0) win_height = 1;
+		
+		// Set window parameters
 		this.setSize(win_width,win_height);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,12 +69,12 @@ public class Game extends JFrame implements GLEventListener
 		for (;;){
 			try 
 			{
-				Thread.sleep(0L);    // one second
+				Thread.sleep(10L);    // one second
 			}
 			catch (Exception e) {}  
-			b = (float) (b - 0.01);
-			r = (float) (r - 0.02);
-			g = (float) (g - 0.03);
+			b = (float) (b - 0.001);
+			r = (float) (r - 0.000);
+			g = (float) (g - 0.001);
 			
 			if((r < 0) || (b < 0) || (g < 0))
 			{
