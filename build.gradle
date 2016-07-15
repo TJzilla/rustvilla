@@ -9,12 +9,24 @@
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'rustvilla.Main'
 
 sourceSets {
     main {
         java {
             srcDir 'src'
         }
+    }
+}
+
+task dist(type: Jar) {
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': project.mainClassName
     }
 }
 
@@ -30,28 +42,6 @@ dependencies {
     compile "org.jogamp.gluegen:gluegen-rt:2.3.1"
     compile "org.jogamp.jogl:jogl-all:2.3.1"
 
-
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-android-aarch64"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-android-armv6"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-linux-amd64"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-linux-armv6"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-linux-armv6hf"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-linux-i586"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-macosx-universal"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-solaris-amd64"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-solaris-i586"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-windows-amd64"
-    runtime "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-windows-i586"
-
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-android-aarch64"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-android-armv6"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-linux-amd64"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-linux-armv6"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-linux-armv6hf"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-linux-i586"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-macosx-universal"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-solaris-amd64"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-solaris-i586"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-windows-amd64"
-    runtime "org.jogamp.jogl:jogl-all:2.3.1:natives-windows-i586"
+    compile "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-windows-amd64"
+    compile "org.jogamp.jogl:jogl-all:2.3.1:natives-windows-amd64"
 }
