@@ -11,6 +11,19 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
+compileJava {
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+}
+
+ext.configFile = file "build.properties"
+configFile.withReader {
+    // Load config.  It shall from now be referenced as simply config or project.config
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
 mainClassName = 'rustvilla.Main'
 
 sourceSets {
@@ -18,11 +31,14 @@ sourceSets {
         java {
             srcDir 'src'
         }
+        resources {
+        	srcDir 'assets'
+        }
     }
 }
 
 task dist(type: Jar) {
-    baseName = project.name
+    baseName = project.name + "-" + config.version
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
     manifest {
