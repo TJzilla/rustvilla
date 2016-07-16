@@ -16,6 +16,14 @@ compileJava {
   targetCompatibility = '1.8'
 }
 
+configurations {
+  win64
+  win32
+  osx
+  linux64
+  linux32
+}
+
 ext.configFile = file "build.properties"
 configFile.withReader {
     // Load config.  It shall from now be referenced as simply config or project.config
@@ -37,14 +45,67 @@ sourceSets {
     }
 }
 
-task dist(type: Jar) {
+
+task distWin64(type: Jar) {
+	destinationDir = file("$rootDir/build/win/64")
     baseName = project.name + "-" + config.version
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.win64.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
     manifest {
         attributes 'Main-Class': project.mainClassName
     }
 }
+
+
+task distWin32(type: Jar) {
+	destinationDir = file("$rootDir/build/win/32")
+    baseName = project.name + "-" + config.version
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.win32.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+}
+
+task distMac(type: Jar) {
+	destinationDir = file("$rootDir/build/osx/universal")
+    baseName = project.name + "-" + config.version
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.osx.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+}
+
+task distLinux64(type: Jar) {
+	destinationDir = file("$rootDir/build/linux/64")
+    baseName = project.name + "-" + config.version
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.linux64.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+}
+
+task distLinux32(type: Jar) {
+	destinationDir = file("$rootDir/build/linux/32")
+    baseName = project.name + "-" + config.version
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.linux32.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+}
+
+task distAll {
+	dependsOn 'distWin64', 'distWin32', 'distMac', 'distLinux64', 'distLinux32'
+}
+	
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -55,9 +116,49 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile "org.jogamp.gluegen:gluegen-rt:2.3.2"
-    compile "org.jogamp.jogl:jogl-all:2.3.2"
+    compile "org.jogamp.jogl:jogl-all:$config.jogAmpVer"
+    compile "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer"
 
-    compile "org.jogamp.gluegen:gluegen-rt:2.3.2:natives-windows-amd64"
-    compile "org.jogamp.jogl:jogl-all:2.3.2:natives-windows-amd64"
+    compile "org.jogamp.jogl:jogl-all:$config.jogAmpVer"
+    compile "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer"
+
+    win64 "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-windows-amd64"
+    win64 "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-windows-amd64"
+
+    win32 "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-windows-i586"
+    win32 "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-windows-i586"
+
+    osx "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-macosx-universal"
+    osx "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-macosx-universal"
+
+    linux64 "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-linux-amd64"
+    linux64 "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-linux-amd64"
+
+    linux32 "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-linux-i586"
+    linux32 "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-linux-i586"
+
+
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-android-aarch64"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-android-armv6"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-linux-amd64"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-linux-armv6"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-linux-armv6hf"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-linux-i586"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-macosx-universal"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-solaris-amd64"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-solaris-i586"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-windows-amd64"
+    runtime "org.jogamp.gluegen:gluegen-rt:$config.jogAmpVer:natives-windows-i586"
+
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-android-aarch64"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-android-armv6"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-linux-amd64"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-linux-armv6"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-linux-armv6hf"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-linux-i586"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-macosx-universal"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-solaris-amd64"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-solaris-i586"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-windows-amd64"
+    runtime "org.jogamp.jogl:jogl-all:$config.jogAmpVer:natives-windows-i586"
 }
