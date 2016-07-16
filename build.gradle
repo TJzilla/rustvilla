@@ -55,9 +55,9 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile "org.jogamp.gluegen:gluegen-rt:2.3.1"
-    compile "org.jogamp.jogl:jogl-all:2.3.1"
+    compile "org.jogamp.gluegen:gluegen-rt:2.3.2"
+    compile "org.jogamp.jogl:jogl-all:2.3.2"
 
-    compile "org.jogamp.gluegen:gluegen-rt:2.3.1:natives-windows-amd64"
-    compile "org.jogamp.jogl:jogl-all:2.3.1:natives-windows-amd64"
+    compile "org.jogamp.gluegen:gluegen-rt:2.3.2:natives-windows-amd64"
+    compile "org.jogamp.jogl:jogl-all:2.3.2:natives-windows-amd64"
 }
