@@ -20,5 +20,9 @@ public class LevelRenderer {
         tiledMapRenderer.render();
     }
 
+    public void changeRenderedLevel(TiledMap tiledMap) {
+        tiledMapRenderer = new OrthoCachedTiledMapRenderer(tiledMap, 2, 5460);
+    }
+
 
 }

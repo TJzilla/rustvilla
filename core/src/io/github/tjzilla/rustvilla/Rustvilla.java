@@ -40,15 +40,23 @@ public class Rustvilla extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		//Set the screens refresh color to black
 		Gdx.gl.glClearColor(1, 1, 1, 1);
+
+		//Enable transparency
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		//Update the camera
 		camera.update();
+
+		//Render the currently loaded level
         levelRenderer.getRenderedLevel(camera);
 
+		//Begin sprite batching
 		batch.begin();
+		//Draw fps on screen
 		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 25, Gdx.graphics.getHeight() - 1);
 		batch.end();
 	}
